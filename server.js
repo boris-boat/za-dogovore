@@ -9,14 +9,17 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 let connectionString =
   "mongodb+srv://vikendica:vikendica@cluster0.hayml.mongodb.net/zaDogovore?retryWrites=true&w=majority";
-
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
 MongoClient.connect(
   connectionString,
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err, client) => {
     db = client.db();
     db.collection("slobodanDatum").find();
-    app.listen(3000);
+    app.listen(port);
   }
 );
 app.get("/", function (req, res) {

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="/public/main.css" />
+    <title>Kalendar za brogovore</title>
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <form action="post-item" method="POST">
+        <label id="date-label" for="date">Slobodan datum</label>
+        <input type="date" name="datum" id="datum" />
+        <label for="time" id="time-label">Vreme</label>
+        <input type="time" name="vreme" id="vreme" />
+        <label for="ime" id="ime-label">Ime</label>
+        <input type="text" id="ime" name="ime" />
+        <button id="unesi">Unesi</button>
+      </form>
+    </div>
+    <div id="button-wrapper">
+      <button id="dugme-brojke" action="remove-item-brojke" method="POST">
+        Resetuj Brojke
+      </button>
+      <button id="dugme-debroljko" action="remove-item-debroljko" method="POST">
+        Resetuj Debroljko
+      </button>
+      <button id="dugme-brosonja" action="remove-item-brosonja" method="POST">
+        Resetuj Brosonja
+      </button>
+    </div>
+    <div id="svi-podaci">
+      <div>
+        <ul>
+          <% for(let i = 0;i < result.length;i++) {%>
+          <li>
+            <span><%= result[i].ime %></span>
+            <span><%= result[i].vreme %></span>
+            <span><%= result[i].datum %></span>
+          </li>
+          <%}%>
+        </ul>
+      </div>
+    </div>
+
+    <script src="/public/browser.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </body>
+</html>

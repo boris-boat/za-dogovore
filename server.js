@@ -32,12 +32,20 @@ app.get("/", function (req, res) {
 });
 
 app.post("/post-item", function (req, res) {
-  db.collection("slobodanDatum").insertOne(
-    { datum: req.body.datum, vreme: req.body.vreme, ime: req.body.ime },
-    () => {
-      res.redirect("/");
-    }
-  );
+  if (
+    req.body.ime == "Brosonja" ||
+    req.body.ime == "Brojke" ||
+    req.body.ime == "Debroljko"
+  ) {
+    db.collection("slobodanDatum").insertOne(
+      { datum: req.body.datum, vreme: req.body.vreme, ime: req.body.ime },
+      () => {
+        res.redirect("/");
+      }
+    );
+  } else {
+    res.redirect("/");
+  }
 });
 app.post("/remove-item-brojke", (req, res) => {
   db.collection("slobodanDatum").deleteOne({ ime: "Brojke" }, () => {
